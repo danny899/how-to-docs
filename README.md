@@ -69,6 +69,21 @@ Go to Route entry settings on AliCloud and add "0.0.0.0/0" point to NAT-instance
 HOORAY!!! now we have a NAT gateway that routes traffic to our internal networks!!! Let's verify the connection. 
 
 
+<h2>Setup a VPN server on ECS</h2>
+
+To make our NAT instance more feature rich, we going to add a VPN server on to the instance. Before we begin, make sure the following components are installed (OpenVPN, Easy-RSA, iptables-services). Run the following command "yum -y install openvpn iptables-services" to install those components.   
+
+<h3>Install OpenVPN</h3>
 
 
+<h3>Install EasyRSA</h3>
+
+
+<h3>Generate Keys</h3>
+
+
+<h3>Configure VPN</h3>
+
+
+<h3>Configure Client</h3>
 
