@@ -74,16 +74,78 @@ HOORAY!!! now we have a NAT gateway that routes traffic to our internal networks
 To make our NAT instance more feature rich, we going to add a VPN server on to the instance. Before we begin, make sure the following components are installed (OpenVPN, Easy-RSA, iptables-services). Run the following command "yum -y install openvpn iptables-services" to install those components.   
 
 <h3>Install OpenVPN</h3>
-
+Install OpenVPN server using "yum -y install openvpn"
 
 <h3>Install EasyRSA</h3>
+Install EasyRSA version 2.x by downloading from the folllowing archive link. https://github.com/OpenVPN/easy-rsa-old/archive/2.3.3.tar.gz
 
+After download, extract the compressed file using tar: "tar xfz 2.3.3.tar.gz"
+
+Move the extraction into OpenVPN directory. Firsty make an empty folder in OpenVPN "sudo mkdir /etc/openvpn/easy-rsa"
+
+Copy the extraction into the folder. "sudo cp -rf easy-rsa-old-2.3.3/easy-rsa/2.0/* /etc/openvpn/easy-rsa"
+
+Open the configuration file under "/etc/openvpn/easy-rsa/2.x/vars", make sure the following settings are added
+
+<blockquote> export KEY_SIZE=2048 </blockquote> 
+<blockquote> export CA_EXPIRE=3650 </blockquote> 
+<blockquote> export KEY_EXPIRE=3650 </blockquote> 
+<blockquote> export KEY_COUNTRY="AU" </blockquote> 
+<blockquote> export KEY_PROVINCE="NSW" </blockquote> 
+<blockquote> export KEY_CITY="Sydney" </blockquote> 
+<blockquote> export KEY_ORG="Company ABC" </blockquote> 
+<blockquote> export KEY_EMAIL="hello@gmail.com" </blockquote> 
+
+Run "source ./vars"
+
+Run "./clean-all" to clean the existing certificates if any
 
 <h3>Generate Keys</h3>
 
+Create the certificate using <blockquote> ./build-ca </blockquote> this will generate a file called ca.key
+
+Next, run <blockquote> ./build-key-server server </blockquote> 
+
+Generate a Diffie-Hellman key exchange file using <blockquote> ./build-dh </blockquote> 
+
+Copy the keys over
+<blockquote> cd /etc/openvpn/easy-rsa/keys </blockquote> 
+<blockquote> sudo cp dh2048.pem ca.crt server.crt server.key /etc/openvpn </blockquote> 
 
 <h3>Configure VPN</h3>
+First, need to make a copy of the default server configuration from user document:
+"cp /usr/share/doc/openvpn-2.x.x/sample/sample-config-files/server.conf /etc/openvpn/"
 
+Open the configuration file in "/etc/openvpn/server.conf"
+
+Add <blockquote> push "route 172.16.0.0 255.255.0.0" </blockquote> 
 
 <h3>Configure Client</h3>
+Run the following command to generate keys for client.
+<blockquote> cd /etc/openvpn/easy-rsa </blockquote> 
+<blockquote> ./build-key client </blockquote> 
 
+The following files will be created.
+/etc/openvpn/easy-rsa/keys/ca.crt
+/etc/openvpn/easy-rsa/keys/client.crt
+/etc/openvpn/easy-rsa/keys/client.key
+/etc/openvpn/myvpn.tlsauth
+
+Create a openvpn configuration file with the path to the keys, "sudo vi myvpn.ovpn", add the following settings to your file.
+
+client
+tls-client
+ca /path/to/ca.crt
+cert /path/to/client.crt
+key /path/to/client.key
+tls-crypt /path/to/myvpn.tlsauth
+remote-cert-eku "TLS Web Client Authentication"
+proto udp
+remote your_server_ip 1194 udp
+dev tun
+topology subnet
+pull
+user nobody
+group nobody
+
+Once the files are created, you can download them to your load disk, and loaded using OpenVPN client. E.g. OpenVPN in windows, or TunnelBlick in mac. 
