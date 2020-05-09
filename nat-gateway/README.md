@@ -26,7 +26,7 @@ A NAT gateway routes traffic in/out to/from private network to the public networ
 </ul> 
 
 Create a pair of subnets for each available zone, a private subnet and a public subnet.
-<img src="./vpc.png" />
+<img src="../vpc.png" />
 
 Navigate to the public subnet, and create a new ECS instance. In my case, I choose a small instance to save money ^^. Assign an elastic IP to the newly created instance (nat-instance).  
 
@@ -64,7 +64,7 @@ Run "iptables-restore < /etc/iptables.conf" to reload the rules, and use "iptabl
 <h3>Route traffic to the NAT Instance</h3>
 Go to Route entry settings on AliCloud and add "0.0.0.0/0" point to NAT-instance.   
 
-<img src="./route.png"/>
+<img src="../route.png"/>
 
 HOORAY!!! now we have a NAT gateway that routes traffic to our internal networks!!! Let's verify the connection. 
 
