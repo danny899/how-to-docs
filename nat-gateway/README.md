@@ -1,4 +1,4 @@
-# How to Setup a NAT Gateway and OpenVPN server on Cloud.
+# How to Setup a NAT Gateway and OpenVPN server on Alibaba Cloud.
 
 After few days of wondering around the web, I manage to setup a VPC network on the Cloud (AliCloud), with a dedicated ECS instance as the NAT gateway and OpenVPN server. Even many of the Cloud vendors (AWS, AliCloud, Azure, etc) nowadays provide NAT Gateway as a service, it is still more cost friendly to setup your own NAT gateway instance, especially when you combine both the NAT gateway service together with the OpenVPN server. I put up this document to help people who wants to setup their own NAT gateway instance without using NAT Gateway as a service.
 
