@@ -42,11 +42,11 @@ Now let's upload/copy the SSH keys into your GitHub accounts. Here is the inform
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 2. In the upper-right corner of any page, click your profile photo, then click *Settings*. 
-3. Click *SSH and GPG keys*
-4. Click *New SSH key* or *Add SSH key*.
+3. Click **SSH and GPG keys**
+4. Click **New SSH key** or **Add SSH key**.
 5. In the "Title" field, add a descriptive label for the new key. For example, if you're using a personal Mac, you might call this key "Personal MacBook Air".
 6. Paste your key into the "Key" field. 
-7. Click *Add SSH Key*
+7. Click **Add SSH Key**
 8. If prompted, confirm your GitHub password. 
 
 Repeat the same steps on your second SSH key `~/.ssh/id_rsa_account_b.pub`, and make sure it's uploaded to your second account (GitHub Account B).
@@ -78,12 +78,38 @@ Basically the above configuration is telling ssh-agent to:
 ## Clone the GitHub Repo
 Once the SSH keys are setup, we are now ready to clone/check out the github repositories.
 
-First, run the following command to switch ssh-agent to use your first key
+### First, run the following command to switch ssh-agent to use your first key
 ```sh
 ssh-add -D
-ssh-add ~/.ssh/id_rsa_work_user1
+ssh-add ~/.ssh/id_rsa
 ```
 
+Then run the git clone command to clone the project(s) in your first github account.
+```sh
+git clone git@github.com-a:account1/project-A.git
+```
+Note the domain name of the repo is **github.com-a**, this is consistent with your git configuration in step 3.
+
+### Now, switch to your second GitHub account using ssh key
+```sh
+ssh-add -D
+ssh-add ~/.ssh/id_rsa_account_b
+```
+
+Then run the git clone command to clone the project(s) in your second github account.
+```sh
+git clone git@github.com-b:account1/project-B.git
+```
+Note the domain name of the repo is **github.com-b**
+
 ## Switch between different SSH Keys in SSH-Agent
+To switch between different GitHub accounts, you simple switch your SSH key using the following command
+```sh
+ssh-add -D
+ssh-add ~/.ssh/id_rsa_account_b  //This changes according to your GitHub SSH key
+```
 
+If you have issue with the SSH key switch, make sure your SSH agent is running, run `eval "$(ssh-agent -s)"`
 
+## Done.
+Now you have both GitHub accounts working on the same machine. Feel free to leave any comment if you have hit issues.
