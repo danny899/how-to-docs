@@ -112,4 +112,4 @@ ssh-add ~/.ssh/id_rsa_account_b  //This changes according to your GitHub SSH key
 If you have issue with the SSH key switch, make sure your SSH agent is running, run `eval "$(ssh-agent -s)"`
 
 ## Done.
-Now you have both GitHub accounts working on the same machine. Feel free to leave any comment if you have hit issues.
+Now you have both GitHub accounts working on the same machine. Feel free to leave any comments or questions.
