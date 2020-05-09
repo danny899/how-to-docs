@@ -1,4 +1,4 @@
-# How to setup multiple github accounts in the same computer
+# How to setup multiple GitHub accounts in the same computer
 
 Quite often we have the need to use multiple github accounts in the same machine, being able to easily switch between different github accounts and work on multiple projects in parallel is a very common use case.
 
