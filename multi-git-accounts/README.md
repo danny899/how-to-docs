@@ -8,7 +8,7 @@ Project A:  git@github.com:account1/project-A.git
 Project B:  git@github.com:account2/project-B.git
 ```
 
-## Generate SSH Keys
+## 1. Generate SSH Keys
 First we need to generate two SSH keys, one for each account. If you already have a SSH, you can use it for one of the GitHub account, in this tutorial, i assume we don't have any SSH setup yet.
 
 ### Run the following command to generate the first/default SSH key. 
@@ -34,7 +34,7 @@ This should create a file in the `~/.ssh/` folder with name `id_rsa_account_b` a
 ```
 
 
-## Add SSH Keys to GitHub Accounts
+## 2. Add SSH Keys to GitHub Accounts
 Now let's upload/copy the SSH keys into your GitHub accounts. Here is the information on [how to upload your SSH key onto GitHub](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account).
 
 1. Copy the SSH to clipboard
@@ -51,7 +51,7 @@ pbcopy < ~/.ssh/id_rsa.pub
 
 Repeat the same steps on your second SSH key `~/.ssh/id_rsa_account_b.pub`, and make sure it's uploaded to your second account (GitHub Account B).
 
-## Creating a SSH configuration for each host
+## 3. Creating a SSH configuration for each host
 We will use a SSH configuration file for domain identity resolution. Run the following command to create or open your SSH configuration file.
 ```sh
 sudo vi ~/.ssh/config
@@ -75,7 +75,7 @@ Basically the above configuration is telling ssh-agent to:
 * Use the `~/.ssh/id_rsa` key for any Git URL with domain github.com-a
 * Use the `~/.ssh/id_rsa_account_b` key for any Git URL with domain github.com-b
 
-## Clone the GitHub Repo
+## 4. Clone the GitHub Repo
 Once the SSH keys are setup, we are now ready to clone/check out the github repositories.
 
 ### First, run the following command to switch ssh-agent to use your first key
@@ -102,7 +102,7 @@ git clone git@github.com-b:account1/project-B.git
 ```
 Note the domain name of the repo is **github.com-b**
 
-## Switch between different SSH Keys in SSH-Agent
+## 5. Switch between different SSH Keys in SSH-Agent
 To switch between different GitHub accounts, you simple switch your SSH key using the following command
 ```sh
 ssh-add -D
