@@ -4,8 +4,8 @@ Quite often we have the need to use multiple github accounts in the same machine
 
 In this document, I'm going to show people how I setup multiple github accounts on my Mac. I will use two projects project-A and project-B as an example, and here are the two sample project links: 
 ```sh
-Project A:  git@github.com:account1/project-A.git
-Project B:  git@github.com:account2/project-B.git
+Project A:  git@github.com:accountA/project-A.git
+Project B:  git@github.com:accountB/project-B.git
 ```
 
 ## 1. Generate SSH Keys
@@ -86,7 +86,7 @@ ssh-add ~/.ssh/id_rsa
 
 Then run the git clone command to clone the project(s) in your first github account.
 ```sh
-git clone git@github.com-a:account1/project-A.git
+git clone git@github.com-a:accountA/project-A.git
 ```
 Note the domain name of the repo is **github.com-a**, this is consistent with your git configuration in step 3.
 
@@ -98,7 +98,7 @@ ssh-add ~/.ssh/id_rsa_account_b
 
 Then run the git clone command to clone the project(s) in your second github account.
 ```sh
-git clone git@github.com-b:account1/project-B.git
+git clone git@github.com-b:accountB/project-B.git
 ```
 Note the domain name of the repo is **github.com-b**
 
