@@ -108,6 +108,10 @@ Edit the following file`/etc/jitsi/meet/meeting.yourdomain.com-config.js`. Uncom
  authdomain: 'meeting.yourdomain.com',
 ```
 
+### Change SIP-Communicator properties
+Edit  `/etc/jitsi/jicofo/sip-communicator.properties`
+Add the `org.jitsi.jicofo.auth.URL=XMPP:meeting.yourdomain.com` to the file
+
 ## Step 6. Create an user for meeting
 ```sh
 sudo prosodyctl register user [meeting.yourdomain.com] password
