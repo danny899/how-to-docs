@@ -50,3 +50,59 @@ apt-get update
 # Perform jitsi-meet installation
 apt-get -y install jitsi-meet
 ```
+
+During the installation, you will be asked to enter the hostname of the Jitsi Meet instance. If you have a Domain name in Step 1, enter it there. If you don't have a resolvable hostname, you can enter the IP address of the machine (if it is static or doesn't change).
+
+This hostname (or IP address) will be used for virtualhost configuration inside the Jitsi Meet and also, you and your correspondents will be using it to access the web conferences.
+
+### Install SSL Certificate
+During the installation you will be asked to install a SSL Certificate. If you don't have a SSL cerificate for domain, and your DNS is set in step 1, select the **Generate a new self-signed certificate** option. Otherwise, you can install a SSL certificate manually later.
+
+Once the installation is complete, Jitsi is up and running on the server
+
+### Confirm that your installation is working
+Launch a web browser (Chrome, Chromium or latest Opera) and enter the hostname `meeting.yourdomain.com` or IP address from the previous step into the address bar.
+
+If you used a self-signed certificate (as opposed to using Let's Encrypt), your web browser will ask you to confirm that you trust the certificate.
+
+You should see a web page prompting you to create a new meeting. Make sure that you can successfully create a meeting and that other participants are able to join the session.
+
+If this all worked, then congratulations! You have an operational Jitsi conference service.
+
+## Step 5. Secure conference creation using username and password
+Once Jsiti is up and running on the server, you will have the following configuration files.
+
+```sh
+/etc/prosody/conf.avail/meeting.yourdomain.com.cfg.lua
+/etc/jitsi/meet/meeting.yourdomain.com-config.js
+/etc/jitsi/jicofo/sip-communicator.properties  //Only need this when you have SIP gateway installed
+```
+
+### Change Prosody configuration `/etc/prosody/conf.avail/meeting.yourdomain.com.cfg.lua`
+a. Enable authentication for your main hostname
+```sh
+VirtualHost "meeting.yourdomain.com"
+    authentication = "internal_plain"
+```
+b. Add new virtual host with anonymous login method for guests: (note you don't need to setup DNS for the guest.meeting.yourdomain.com domain)
+```sh
+VirtualHost "guest.meeting.yourdomain.com"
+    authentication = "anonymous"
+    modules_enabled = {
+        "ping";
+        "speakerstats";
+        "turncreadentials";
+        "conference_duration";
+   }
+    c2s_require_encryption = false
+```
+
+### Change `/etc/jitsi/meet/meeting.yourdomain.com-config.js`
+Uncomment out the following two lines, and make sure the domain name is replace with your own domain, e.g. `meeting.yourdomain.com`
+```sh
+ // When using authentication, domain for guest users.
+ anonymousdomain: 'guest.meeting.yourdomain.com',
+
+ // Domain for authenticated users. Defaults to <domain>.
+ authdomain: 'meeting.yourdomain.com',
+```
