@@ -35,20 +35,20 @@ Go to AWS Console, and go to the security group associated with your EC2 instanc
 
 ### Add the Jitsi package library
 ```sh
-echo 'deb https://download.jitsi.org stable/' | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
-wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
+$ echo 'deb https://download.jitsi.org stable/' | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
+$ wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
 ```
 
 ### Install Jitsi
 ```sh
 # Ensure support is available for apt repositories served via HTTPS
-apt-get install apt-transport-https
+$ apt-get install apt-transport-https
 
 # Retrieve the latest package versions across all repositories
-apt-get update
+$ apt-get update
 
 # Perform jitsi-meet installation
-apt-get -y install jitsi-meet
+$ apt-get -y install jitsi-meet
 ```
 
 During the installation, you will be asked to enter the hostname of the Jitsi Meet instance. If you have a Domain name in Step 1, enter it there. If you don't have a resolvable hostname, you can enter the IP address of the machine (if it is static or doesn't change).
@@ -114,13 +114,13 @@ Add the `org.jitsi.jicofo.auth.URL=XMPP:meeting.yourdomain.com` to the file
 
 ## Step 6. Create an user for meeting
 ```sh
-sudo prosodyctl register user [meeting.yourdomain.com] password
+$ sudo prosodyctl register user [meeting.yourdomain.com] password
 ```
 
-## Restart the service
+## Restart the service and Done
 ```sh
-service jicofo restart
-service jitsi-videobridge2 restart
-service prosody restart
-service nginx restart //only needed if running nginx
+$ service jicofo restart
+$ service jitsi-videobridge2 restart
+$ service prosody restart
+$ service nginx restart //only needed if running nginx
 ```
