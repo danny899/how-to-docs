@@ -78,7 +78,8 @@ Once Jsiti is up and running on the server, you will have the following configur
 /etc/jitsi/jicofo/sip-communicator.properties  //Only need this when you have SIP gateway installed
 ```
 
-### Change Prosody configuration `/etc/prosody/conf.avail/meeting.yourdomain.com.cfg.lua`
+### Change Prosody configuration 
+Edit the Prosody configuration file `/etc/prosody/conf.avail/meeting.yourdomain.com.cfg.lua`
 a. Enable authentication for your main hostname
 ```sh
 VirtualHost "meeting.yourdomain.com"
@@ -97,12 +98,25 @@ VirtualHost "guest.meeting.yourdomain.com"
     c2s_require_encryption = false
 ```
 
-### Change `/etc/jitsi/meet/meeting.yourdomain.com-config.js`
-Uncomment out the following two lines, and make sure the domain name is replace with your own domain, e.g. `meeting.yourdomain.com`
+### Change Meet Config
+Edit the following file`/etc/jitsi/meet/meeting.yourdomain.com-config.js`. Uncomment out the following two lines, and make sure the domain name is replace with your own domain, e.g. `meeting.yourdomain.com`
 ```sh
  // When using authentication, domain for guest users.
  anonymousdomain: 'guest.meeting.yourdomain.com',
 
  // Domain for authenticated users. Defaults to <domain>.
  authdomain: 'meeting.yourdomain.com',
+```
+
+## Step 6. Create an user for meeting
+```sh
+sudo prosodyctl register user [meeting.yourdomain.com] password
+```
+
+## Restart the service
+```sh
+service jicofo restart
+service jitsi-videobridge2 restart
+service prosody restart
+service nginx restart //only needed if running nginx
 ```
