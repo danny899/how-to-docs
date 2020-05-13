@@ -35,5 +35,12 @@ VirtualHost "<dnsname>"
   ...
 ```
 
+Now, edit the videobridge configuration in `/etc/jitsi/videobridge/config`, and look for the configuration line `JVB_OPTS="--apis=,"`, and change it to following
+```sh
+JVB_OPTS="--apis=rest,xmpp --subdomain=videobridge2"
+```
+
+
+
 ### b.) Change the components interface from localhost to public interface
 
