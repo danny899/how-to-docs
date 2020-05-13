@@ -34,11 +34,16 @@ Go to AWS Console, and go to the security group associated with your EC2 instanc
 ## Step 4. Install Jitsi Meet
 
 ### Add the Jitsi package library
+Run following command as super user.
 ```sh
 $ echo 'deb https://download.jitsi.org stable/' | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
+deb https://download.jitsi.org stable/
 $ wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
+OK
 ```
-
+If you hit an error like `gnupg, gnupg2 and gnupg1 do not seem to be installed`, you will need to install `gnupg`
+ or `gnupg2` using `apt-get install gnupg2`. Then you can add the key after that.
+ 
 ### Install Jitsi
 ```sh
 # Ensure support is available for apt repositories served via HTTPS
