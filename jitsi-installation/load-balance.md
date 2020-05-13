@@ -35,7 +35,7 @@ VirtualHost "<dnsname>"
   ...
 ```
 
-Now, edit the videobridge configuration in `/etc/jitsi/videobridge/config`, and look for the configuration line `JVB_OPTS="--apis=,"`, and change it to following
+Now, edit the videobridge configuration in `/etc/jitsi/videobridge/config`, and look for the configuration line `JVB_OPTS="--apis=,"`, and change it to following. By default, the JID uses `jitsi-videobridge` as the default subdomain, so this change will set JID to use custom domain.
 ```sh
 JVB_OPTS="--apis=rest,xmpp --subdomain=videobridge2"
 ```
