@@ -118,6 +118,15 @@ JVB_HOST=<domainname>
 ### Edit the Prosody configuration 
 Edit the file in `/etc/prosody/conf.d/<dnsname>.cfg.lua`, at the bottom of the main `VirtualHost` add the following
 ```sh
-component "videobridge2.<dnsname>" //This is the domain name of the second videobridge
-component_secret = "<password>" //This can be found on second VB, under /etc/jitsi/videobridge/config
+Component "videobridge2.<dnsname>" //This is the domain name of the second videobridge
+   component_secret = "<password>" //This can be found on second VB, under /etc/jitsi/videobridge/config
 ```
+
+### Restart the services on Server A
+```sh
+prosody reload
+jicofo restart
+jitsi-videobridge restart
+```
+
+### Restart videobridge on Server B
