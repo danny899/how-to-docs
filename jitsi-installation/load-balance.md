@@ -37,7 +37,7 @@ VirtualHost "<dnsname>"
 ### Configure Videobridge configuration
 Now, edit the videobridge configuration in `/etc/jitsi/videobridge/config`, and look for the configuration line `JVB_OPTS="--apis=,"`, and change it to following. By default, the JID uses `jitsi-videobridge` as the default subdomain, so this change will set JID to use custom domain.
 ```sh
-JVB_OPTS="--apis=rest,xmpp --subdomain=videobridge2" //????
+JVB_OPTS="--apis=rest,xmpp --subdomain=videobridge2" //???
 
 JVB_HOST=<domainname> 
 ```
@@ -103,13 +103,6 @@ org.jitsi.videobridge.ENABLE_STATISTICS=true
 org.jitsi.videobridge.STATISTICS_TRANSPORT=pubsub
 org.jitsi.videobridge.PUBSUB_SERVICE=<domainname>
 org.jitsi.videobridge.PUBSUB_NODE=sharedStatsNode
-```
-
-???Not needed
-In `/etc/jitsi/jicofo/sip-communicator.properties` file, adding the following lines
-```sh
-org.jitsi.focus.pubsub.ADDRESS=<domainname>
-org.jitsi.focus.STATS_PUBSUB_NODE=sharedStatsNode
 ```
 
 ### Configure Videobridge configuration
