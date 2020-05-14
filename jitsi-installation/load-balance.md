@@ -49,6 +49,7 @@ Edit the prosody configuration `/etc/prosody/prosody.cfg.lua` to listen for publ
 component_ports = {5347}
 component_interface = "<IPaddress>"  //replace this IP address with the public IP of your main Jitsi Meet server (Server A)
 ```
+Note the IP address here is dependant on your network setup. A global solution is to set it to `0.0.0.0`, which listens for all IP ranges.
 
 ### Change Jicofo configuration to use public domain
 Now, change the following configuration files to replace `localhost` with your jitsi domain.
@@ -87,7 +88,7 @@ $ wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
 ```
 If you hit an error like gnupg, gnupg2 and gnupg1 do not seem to be installed, you will need to install gnupg or gnupg2 using apt-get install gnupg2. Then you can add the key after that.
 
-### Install jitsi videobridge
+### Install jitsi videobridge 
 run the following command
 ```sh
 $ apt-get update
@@ -96,7 +97,7 @@ $ apt-get install jitsi-videobridge
 
 We will get prompted for Domain name of the main server, replace localhost with the domain name of the main server.
 
-### Change the SIP-Communicator configurations
+### Configure Videobridge to use pubsub
 in `/etc/jitsi/videobridge/sip-communicator.properties` to enable statistics and to set statistics to use pubsub, add the following lines if they are missing, or otherwise make sure the transport is pubsub, make sure the `domainname` is pointing to server A.
 ```sh
 org.jitsi.videobridge.ENABLE_STATISTICS=true
@@ -105,7 +106,7 @@ org.jitsi.videobridge.PUBSUB_SERVICE=<domainname>
 org.jitsi.videobridge.PUBSUB_NODE=sharedStatsNode
 ```
 
-### Configure Videobridge configuration
+### Configure Videobridge to connect to the main server
 Now, edit the videobridge configuration in `/etc/jitsi/videobridge/config`, and look for the configuration line `JVB_OPTS="--apis=,"`, and change it to following. By default, the JID uses `jitsi-videobridge` as the default subdomain, so this change will set JID to use custom domain.
 ```sh
 JVB_OPTS="--apis=rest,xmpp --subdomain=videobridge2" 
@@ -115,7 +116,7 @@ JVB_HOST=<domainname>
 
 ## PART C. Add components to main Jitsi server (Server A)
 
-### Edit the Prosody configuration 
+### Set videobridge credentials
 Edit the file in `/etc/prosody/conf.d/<dnsname>.cfg.lua`, at the bottom of the main `VirtualHost` add the following
 ```sh
 Component "videobridge2.<dnsname>" //This is the domain name of the second videobridge
