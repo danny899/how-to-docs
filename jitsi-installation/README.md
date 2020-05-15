@@ -1,4 +1,4 @@
-# How to install Jitsi Meeting on AWS EC2 (Debian OS)
+# How to install Jitsi Meet on AWS EC2 (Debian OS)
 
 ## Introduction 
 This document provides step-to-step guide on how to install Jitsi Meeting on Debian Operation System
