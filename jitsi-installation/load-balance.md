@@ -4,6 +4,8 @@
 In this document, we going to link the Jitsi meet installed in [previous article](./README.md) with multiple Videobridges.
 Videobridge communicates using XMPP protocol, so we can setup a XMPP Pubsub node that listens to all Videobridge nodes, and pushes the events to Jicofo.
 
+<img src="./Jitsi-Meet-load-balancing.png" />
+
 ## Prerequisits
 In this article, we assume you have two server machines, one (Server A) with default Jitsi Meet installation, and the other (Server B) is empty.
 
