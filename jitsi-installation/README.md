@@ -102,7 +102,7 @@ VirtualHost "guest.meeting.yourdomain.com"
 ```
 
 ### Change Meet Config
-Edit the following file`/etc/jitsi/meet/meeting.yourdomain.com-config.js`. Uncomment out the following two lines, and make sure the domain name is replace with your own domain, e.g. `meeting.yourdomain.com`
+Edit the following file `/etc/jitsi/meet/meeting.yourdomain.com-config.js`. Uncomment out the following two lines, and make sure the domain name is replace with your own domain, e.g. `meeting.yourdomain.com`
 ```sh
  // When using authentication, domain for guest users.
  anonymousdomain: 'guest.meeting.yourdomain.com',
