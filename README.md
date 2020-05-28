@@ -5,3 +5,4 @@
 - [How to setup Multiple Github Account on the same Mac](multi-git-accounts/README.md)
 - [How to install Jitsi Meet on AWS EC2 (Debian OS)](jitsi-installation/README.md)
 - [How to setup Jitsi Meet with multiple videobridge nodes (Debian OS)](jitsi-installation/load-balance.md)
+- [How to automate SSL installation using CertBot](certbot/README.md)
