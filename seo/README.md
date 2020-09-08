@@ -1,6 +1,6 @@
-#Google SEO Optimisation Tips
+# Google SEO Optimisation Tips
 
-##Tools
+## Tools
 
 Here is a list of tools to help Google SEO optimisation
 - Google Web Master Tool
